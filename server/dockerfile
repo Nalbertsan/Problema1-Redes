@@ -1,0 +1,18 @@
+# Use uma imagem base do Python
+FROM python:3.9
+
+# Exponha a porta que o servidor estará usando
+EXPOSE 5000
+
+# Define o diretório de trabalho dentro do container
+WORKDIR /.
+
+# Copia o arquivo requirements.txt e instala as dependências
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia todo o conteúdo do projeto para o diretório de trabalho no container
+COPY . .
+
+# Define o comando padrão para rodar quando o container iniciar
+CMD ["python","-u","travel_server.py"]

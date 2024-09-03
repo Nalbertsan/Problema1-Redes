@@ -1,0 +1,2 @@
+# Exemplo de um requirements.txt
+# Nenhuma biblioteca externa necessária
