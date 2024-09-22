@@ -57,3 +57,26 @@ Interoperabilidade: É amplamente suportado por diversas linguagens de programa�
 Estrutura Flexível: Permite representar os dados de forma estruturada, como listas de trechos de voos, status de reservas e confirmações.
 
 O uso de JSON facilita a troca de informações, mantendo o sistema eficiente e compatível com diversas plataformas.
+
+# O sistema permite a realização de compras de passagens de forma paralela ou simultânea? Como é possivel otimizar o paralelismo do sistema.
+
+O sistema permite que vários clientes realizem compras simultaneamente. Isso é possível porque o servidor controla o acesso aos trechos de voos, garantindo que, ao reservar um trecho, ele seja bloqueado para outros clientes até a transação ser concluída ou expirar. Esse controle evita conflitos em reservas feitas em paralelo. E a otimização do paralelismo foi realizada fazendo com que a solicitação de cliente pode ser processada em uma thread ou processo separado, permitindo que múltiplos pedidos sejam atendidos ao mesmo tempo.
+
+# Há problemas de concorrência decorrentes do uso de conexões simultâneas? Se sim, como estas questões foram tratadas?
+
+Para evitar conflitos em conexões simultâneas, o servidor implementa um mecanismo de bloqueio (lock) para cada trecho de voo. Quando um cliente tenta reservar um trecho, esse trecho é temporariamente bloqueado até a confirmação ou cancelamento da compra, evitando que outros clientes reservem o mesmo trecho simultaneamente.
+
+## Sincronização de Acesso: 
+Durante o processamento de múltiplas requisições, o servidor garante que as atualizações no banco de dados de trechos sejam feitas de forma atômica, assegurando que apenas um cliente por vez consiga reservar ou modificar o estado de um trecho.
+
+Essas estratégias garantem que o sistema lide de maneira eficiente com conexões simultâneas, evitando inconsistências nas reservas.
+
+# O sistema utiliza algum mecanimos para melhorar o tempo de resposta (uso de cache, filas, threads, etc.)? Como você avaliou o desempenho do seu sistema? Fez algum teste de desempenho?
+
+Para melhorar o tempo de resposta do sistema, foram implementados mecanismos de concorrência utilizando threads. Isso permite que múltiplos clientes possam realizar compras de passagens simultaneamente, sem que um processo interfira no outro. Esse paralelismo ajuda a otimizar o uso do servidor e garantir que as requisições sejam processadas de maneira eficiente, diminuindo a latência.
+
+O desempenho do sistema foi avaliado através de testes de estresse em ambiente Docker, simulando múltiplos clientes conectados ao servidor. Foram observados o tempo de resposta das requisições e o comportamento do servidor sob carga. Não foram utilizados mecanismos de cache ou filas.
+
+#Tirando e recolocando o cabo de algum dos nós, o sistema continua funcionando? Ele continua podendo fazer a compra que iniciou anteriormente?
+
+O sistema não foi projetado para lidar com falhas de rede, como a desconexão de um nó. Se o cabo for retirado durante uma compra, a conexão com o servidor será perdida e a compra será interrompida. Quando o nó é reconectado, o cliente precisará reiniciar o processo de compra. Não há suporte para retomada automática de transações incompletas após a falha de rede.
