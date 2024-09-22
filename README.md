@@ -77,6 +77,6 @@ Para melhorar o tempo de resposta do sistema, foram implementados mecanismos de 
 
 O desempenho do sistema foi avaliado através de testes de estresse em ambiente Docker, simulando múltiplos clientes conectados ao servidor. Foram observados o tempo de resposta das requisições e o comportamento do servidor sob carga. Não foram utilizados mecanismos de cache ou filas.
 
-#Tirando e recolocando o cabo de algum dos nós, o sistema continua funcionando? Ele continua podendo fazer a compra que iniciou anteriormente?
+# Tirando e recolocando o cabo de algum dos nós, o sistema continua funcionando? Ele continua podendo fazer a compra que iniciou anteriormente?
 
 O sistema não foi projetado para lidar com falhas de rede, como a desconexão de um nó. Se o cabo for retirado durante uma compra, a conexão com o servidor será perdida e a compra será interrompida. Quando o nó é reconectado, o cliente precisará reiniciar o processo de compra. Não há suporte para retomada automática de transações incompletas após a falha de rede.
