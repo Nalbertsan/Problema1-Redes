@@ -30,17 +30,17 @@ Processo de Compra em Múltiplos Passos: Como o cliente pode selecionar vários 
 
 # Que protocolo de comunicação foi desenvolvido entre os componentes do sistema? Quais as mensagens e a ordem das mensagens trocadas.
 
-Protocolo de Comunicação usado foi TCP/IP
+## Protocolo de Comunicação usado foi TCP/IP
 Mensagens Trocadas e Ordem:
-Requisição de Disponibilidade:
+### Requisição de Disponibilidade:
 Cliente → Servidor: O cliente envia uma mensagem solicitando a lista de trechos disponíveis.
 Servidor → Cliente: O servidor responde com a lista de trechos disponíveis, incluindo detalhes como origem e destino
-Solicitação de Reserva:
+### Solicitação de Reserva:
 Cliente → Servidor: Após escolher um trecho, o cliente envia uma mensagem de reserva especificando o voo desejado.
 Servidor → Cliente: O servidor verifica a disponibilidade do trecho e, se disponível, confirma a reserva ao cliente. Caso o trecho já esteja reservado, o servidor envia uma mensagem de erro.
-Confirmação de Compra:
+### Confirmação de Compra:
 Cliente → Servidor: O cliente confirma a compra dos trechos reservados.
 Servidor → Cliente: O servidor finaliza a transação e envia uma confirmação da compra ou um erro caso algo falhe.
-Ordem das Mensagens:
+### Ordem das Mensagens:
 Consulta → 2. Reserva → 3. Confirmação da Compra.
 Esse fluxo garante que os trechos sejam consultados, reservados e comprados de forma organizada e com controle sobre a disponibilidade.
