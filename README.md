@@ -19,3 +19,28 @@ Atualiza a base de dados com as reservas feitas e responde aos clientes.
 Protocolo de Comunicação (TCP/IP): Define a troca de dados estruturada e confiável entre o cliente e o servidor, garantindo a entrega e a integridade das mensagens.
 Contêineres Docker: Facilita a execução e escalabilidade do sistema, permitindo rodar várias instâncias de clientes e servidores de forma isolada e eficiente.
 Gerenciamento de Trechos: A lógica interna no servidor que garante a consistência das reservas, evitando duplicidade de trechos e assegurando que o primeiro cliente a reservar tenha a preferência.
+
+# Que paradigma de serviço foi usado (stateless ou statefull)? Qual(is) o(s) motivo(s) dessa escolha.
+
+## Motivo da Escolha:
+O sistema foi desenvolvido utilizando um paradigma stateful porque ele precisa manter o estado das reservas de trechos durante a interação com os clientes. Ou seja, o servidor deve rastrear quais trechos foram reservados e garantir que um cliente, após iniciar o processo de compra, tenha preferência sobre os trechos selecionados até a finalização da transação.
+Esse paradigma foi escolhido por dois motivos principais:
+Consistência nas Reservas: O servidor precisa garantir que uma vez que um cliente reserve um trecho, este não seja oferecido a outros clientes, exigindo que o estado da transação seja mantido ao longo da sessão.
+Processo de Compra em Múltiplos Passos: Como o cliente pode selecionar vários trechos (voos) em sequência, o servidor deve manter o histórico dessa escolha para completar a compra, o que requer um modelo stateful.
+
+# Que protocolo de comunicação foi desenvolvido entre os componentes do sistema? Quais as mensagens e a ordem das mensagens trocadas.
+
+Protocolo de Comunicação usado foi TCP/IP
+Mensagens Trocadas e Ordem:
+Requisição de Disponibilidade:
+Cliente → Servidor: O cliente envia uma mensagem solicitando a lista de trechos disponíveis.
+Servidor → Cliente: O servidor responde com a lista de trechos disponíveis, incluindo detalhes como origem e destino
+Solicitação de Reserva:
+Cliente → Servidor: Após escolher um trecho, o cliente envia uma mensagem de reserva especificando o voo desejado.
+Servidor → Cliente: O servidor verifica a disponibilidade do trecho e, se disponível, confirma a reserva ao cliente. Caso o trecho já esteja reservado, o servidor envia uma mensagem de erro.
+Confirmação de Compra:
+Cliente → Servidor: O cliente confirma a compra dos trechos reservados.
+Servidor → Cliente: O servidor finaliza a transação e envia uma confirmação da compra ou um erro caso algo falhe.
+Ordem das Mensagens:
+Consulta → 2. Reserva → 3. Confirmação da Compra.
+Esse fluxo garante que os trechos sejam consultados, reservados e comprados de forma organizada e com controle sobre a disponibilidade.
