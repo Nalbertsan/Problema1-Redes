@@ -44,3 +44,16 @@ Servidor → Cliente: O servidor finaliza a transação e envia uma confirmaçã
 ### Ordem das Mensagens:
 Consulta → 2. Reserva → 3. Confirmação da Compra.
 Esse fluxo garante que os trechos sejam consultados, reservados e comprados de forma organizada e com controle sobre a disponibilidade.
+
+# Que tipo de formatação de dados foi usada para transmitir os dados, permitindo que nós de diferentes sistemas e implementadas em diferentes linguagens compreendam as mensagens trocadas.
+
+## Formatação de Dados: JSON (JavaScript Object Notation)
+O JSON foi escolhido como formato de transmissão de dados porque:
+
+Simplicidade e Leveza: É fácil de ler e escrever, tanto para humanos quanto para máquinas.
+
+Interoperabilidade: É amplamente suportado por diversas linguagens de programação, permitindo que diferentes sistemas, mesmo implementados em linguagens distintas, compreendam e processem as mensagens trocadas.
+
+Estrutura Flexível: Permite representar os dados de forma estruturada, como listas de trechos de voos, status de reservas e confirmações.
+
+O uso de JSON facilita a troca de informações, mantendo o sistema eficiente e compatível com diversas plataformas.
