@@ -1,0 +1,17 @@
+# Use uma imagem oficial do Python como base
+FROM python:3.9-slim
+
+# Define o diretório de trabalho dentro do contêiner
+WORKDIR /app
+
+# Copia os arquivos do projeto para o diretório de trabalho no contêiner
+COPY . /app
+
+# Instala as dependências, caso tenha um arquivo de requirements (crie-o se necessário)
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expõe a porta que o servidor TCP irá usar
+EXPOSE 5000
+
+# Define o comando para iniciar o cliente Python
+CMD ["python", "-u", "client.py"]
