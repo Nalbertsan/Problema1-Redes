@@ -1,26 +1,11 @@
 import socket
-import sys
 import threading
 import json
 from travel import Travel, TravelSegment
 from user import User
 
-
-
-def get_local_ip():
-    try:
-        hostname = socket.gethostname()
-        local_ip = socket.gethostbyname(hostname)
-        return local_ip
-    except Exception as e:
-        sys.stderr.write(f"Erro ao obter o IP: {e}\n")
-        sys.exit(1)
-
-ip = get_local_ip()
-print(f"O IP local da máquina é: {ip}")
-
 class TravelServer:
-    def __init__(self, host=ip, port=5000):
+    def __init__(self, host='0.0.0.0', port=5000):
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.server.bind((host, port))
