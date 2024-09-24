@@ -231,11 +231,10 @@ class Travel:
 
 
 def simulate_reservation(travel, user, seat_number, segment_indices):
-    # Tenta reservar o assento
+    """Simula a reserva e confirmação de um assento em uma viagem."""
     reservation_success = travel.reserve_seat(user, seat_number, segment_indices)
     if reservation_success:
-        # Tenta confirmar a reserva
-        confirmation_success = travel.confirm_reservation(user, seat_number, segment_indices)
+        confirmation_success = travel.confirm(user, seat_number, segment_indices)
         if confirmation_success:
             print(f"{user.username} confirmou o assento {seat_number} nos segmentos {segment_indices}.")
         else:
@@ -272,18 +271,19 @@ def main():
         threading.Thread(target=simulate_reservation, args=(travel, user3, seat_number, segment_indices)),
     ]
 
-    # Inicia as threads
+    # Inicia todas as threads
     for thread in threads:
         thread.start()
 
-    # Aguarda a conclusão de todas as threads
+    # Aguarda todas as threads terminarem
     for thread in threads:
         thread.join()
 
-    # Lista todos os assentos confirmados após as operações
-    final_seats = travel.list_all_final_seats(user1)
-    print(final_seats)
-    
+    # Lista os assentos finais ocupados
+    print("Assentos finais confirmados por usuário:")
+    for user in [user1, user2, user3]:
+        print(f"{user.username}: {travel.list_all_final_seats(user)}")
+
 
 # Executa o teste
 if __name__ == "__main__":
