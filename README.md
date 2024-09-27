@@ -16,7 +16,7 @@ Substitua `5000` e `5000` pelas portas desejadas, garantindo que a porta local e
 
 1. Faça o download ou clone o repositório do cliente. A pasta necessária para rodar o cliente é chamada "Client". Se estiver utilizando `git`, use o comando:
 
-git clone [<URL_DO_REPOSITORIO>](https://github.com/Nalbertsan/Problema1-Redes/edit/main/README.md)
+git clone [<URL_DO_REPOSITORIO>](https://github.com/Nalbertsan/Problema1-Redes/)
 
 2. Acesse a pasta "Client", onde os arquivos do cliente estão localizados. Isso pode ser feito com o seguinte comando:
 
