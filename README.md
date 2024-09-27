@@ -1,3 +1,39 @@
+Para rodar esta aplicação, é necessário ter Docker e Python 3.10 ou superior instalados na máquina.
+
+### Como rodar o Servidor
+
+Primeiramente, será necessário baixar a imagem Docker do servidor. Para isso, execute o comando:
+
+docker pull nalbertsan/serverpbl:1.1
+
+Após o download da imagem, você deve rodar uma instância do container. Use o comando abaixo para isso:
+
+docker run -d --name serverpbl -p <porta_local>:<porta_container> nalbertsan/serverpbl:1.1
+
+Substitua `5000` e `5000` pelas portas desejadas, garantindo que a porta local esteja disponível.
+
+### Como rodar o Cliente
+
+1. Faça o download ou clone o repositório do cliente. A pasta necessária para rodar o cliente é chamada "Client". Se estiver utilizando `git`, use o comando:
+
+git clone <URL_DO_REPOSITORIO>
+
+2. Acesse a pasta "Client", onde os arquivos do cliente estão localizados. Isso pode ser feito com o seguinte comando:
+
+cd Client
+
+3. Agora, basta rodar o arquivo `main.py`. Para isso, certifique-se de que o Python 3.10 ou superior está instalado e configurado corretamente, e execute o comando:
+
+python main.py
+
+Com isso, o cliente será iniciado e se comunicará com o servidor rodando em Docker.
+
+### Observações
+
+- Certifique-se de que o servidor está rodando corretamente antes de iniciar o cliente.
+- Verifique as configurações de portas e quaisquer bloqueios de firewall que possam interferir na comunicação entre cliente e servidor.
+
+
 # Introdução
 
 Com o crescimento das companhias aéreas de baixo custo, surgiu a necessidade de sistemas automatizados para compra de passagens pela Internet. Uma nova companhia brasileira busca implementar uma solução que permita aos clientes reservarem trechos de voos via TCP/IP, garantindo eficiência e disponibilidade. Este relatório descreve o desenvolvimento de um sistema utilizando a linguagem Python e a API Socket para comunicação direta entre clientes e servidor, sem o uso de frameworks externos. A solução foi testada em contêineres Docker, garantindo escalabilidade e gestão eficiente das instâncias, permitindo reservas de trechos de forma robusta e em tempo real.
